@@ -4,8 +4,16 @@
   "description": "My Personal Website",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "dev": "watchify ./src/main.js -o ./src/bundle.js"
   },
   "author": "Kaan Serin",
-  "license": "ISC"
+  "license": "ISC",
+  "devDependencies": {
+    "watchify": "^4.0.0"
+  },
+  "dependencies": {
+    "dat.gui": "^0.7.7",
+    "three-gltf-loader": "^1.111.0"
+  }
 }
