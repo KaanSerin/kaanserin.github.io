@@ -5742,8 +5742,22 @@ loader.load(
   }
 );
 
+// this is a helper class
+class ColorGUIHelper {
+  constructor(object, prop) {
+    this.object = object;
+    this.prop = prop;
+  }
+  get value() {
+    return `#${this.object[this.prop].getHexString()}`;
+  }
+  set value(hexString) {
+    this.object[this.prop].set(hexString);
+  }
+}
+
 const scene = new THREE.Scene();
-scene.background = new THREE.Color("#111111");
+scene.background = new THREE.Color("#141414");
 const camera = new THREE.PerspectiveCamera(
   75,
   window.innerWidth / window.innerHeight,
@@ -5774,19 +5788,31 @@ function makeRotationGUI(gui, vector3, name, onChangeFn) {
 }
 
 // Light
-const color = 0xffffff;
-const intensity = 1.12;
+const color = 0xc6a8ff;
+const intensity = 0.62;
 const light = new THREE.PointLight(color, intensity);
-light.position.set(-0.2, 4, 0);
+light.position.set(2.7, 2.5, -2.4);
+// light.target.position.set(0, 2.3, 0);
 light.castShadow = true;
 light.shadow.bias = -0.0001;
 light.shadow.mapSize.width = 2048;
 light.shadow.mapSize.height = 2048;
 
 scene.add(light);
-
 const helper = new THREE.PointLightHelper(light, 0.2);
 scene.add(helper);
+gui.addColor(new ColorGUIHelper(light, "color"), "value").name("color");
+gui.add(light, "intensity", 0, 2, 0.01);
+gui.add(light.shadow, "bias", -0.1, 0.1, 0.0001);
+
+const deskLight = new THREE.PointLight(0xffffff, 0.1);
+deskLight.castShadow = false;
+deskLight.position.set(1, 3, 1);
+scene.add(deskLight);
+const deskLightHelper = new THREE.PointLightHelper(deskLight, 0.2);
+scene.add(deskLightHelper);
+makeXYZGUI(gui, deskLight.position, "deskLightposition", updateLight);
+gui.add(deskLight, "intensity", 0, 2, 0.01);
 
 // const ambLight = new THREE.AmbientLight(0xaaaaaa, 1);
 // scene.add(ambLight);
@@ -5795,29 +5821,30 @@ function updateLight() {
   helper.update();
 }
 
-makeXYZGUI(gui, light.position, "position", updateLight);
-
-// this is a helper class
-class ColorGUIHelper {
-  constructor(object, prop) {
-    this.object = object;
+class DegRadHelper {
+  constructor(obj, prop) {
+    this.obj = obj;
     this.prop = prop;
   }
   get value() {
-    return `#${this.object[this.prop].getHexString()}`;
+    return THREE.MathUtils.radToDeg(this.obj[this.prop]);
   }
-  set value(hexString) {
-    this.object[this.prop].set(hexString);
+  set value(v) {
+    this.obj[this.prop] = THREE.MathUtils.degToRad(v);
   }
 }
 
-gui.addColor(new ColorGUIHelper(light, "color"), "value").name("color");
-gui.add(light, "intensity", 0, 2, 0.01);
-gui.add(light.shadow, "bias", -0.1, 0.1, 0.0001);
+makeXYZGUI(gui, light.position, "position", updateLight);
+// makeXYZGUI(gui, light.target.position, "target", updateLight);
+// gui
+//   .add(new DegRadHelper(light, "angle"), "value", 0, 90)
+//   .name("angle")
+//   .onChange(updateLight);
+// makeXYZGUI(gui, light.position, "position", updateLight);
 
-camera.position.set(-6.5, 12.5, 1);
+camera.position.set(-4.4, 4, 1.3);
 // camera.lookAt(scene.position);
-camera.rotation.x = -0.5;
+camera.rotation.set(0, -1.5, 0);
 
 makeXYZGUI(gui, camera.position, "camera position");
 makeRotationGUI(gui, camera.rotation, "camera rotation");
@@ -5842,7 +5869,7 @@ function checkRotation() {
 const animate = function () {
   requestAnimationFrame(animate);
   // scene.children[2].rotation += 0.01;
-  checkRotation();
+  // checkRotation();
   renderer.render(scene, camera);
 };
 
