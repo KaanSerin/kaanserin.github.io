@@ -3307,7 +3307,7 @@ const typeName = (chars, el) => {
     window.clearInterval(intervalName);
     descriptionInterval = setInterval(
       () => typeDesc(descriptionText, description),
-      90
+      50
     );
     return;
   }
@@ -3368,12 +3368,13 @@ const onMouseMove = (e) => {
 document.addEventListener("mousemove", onMouseMove);
 
 // Mobile Motion Detection
+const mobileLookAmount = 2.5;
 window.addEventListener("devicemotion", (e) => {
   // console.log(e.rotationRate);
   camera.rotation.set(
-    (camera.rotation.x += e.rotationRate.alpha / 20000),
-    (camera.rotation.y += e.rotationRate.beta / 50000),
-    (camera.rotation.z += e.rotationRate.alpha / 20000)
+    (camera.rotation.x += (e.rotationRate.alpha * mobileLookAmount) / 20000),
+    (camera.rotation.y += (e.rotationRate.beta * mobileLookAmount) / 50000),
+    (camera.rotation.z += (e.rotationRate.alpha * mobileLookAmount) / 20000)
   );
 });
 
