@@ -3179,7 +3179,7 @@ const GLTFLoader = require("three-gltf-loader");
 const loader = new GLTFLoader();
 
 loader.load(
-  "./assets/Exports/RoomModel.glb",
+  "./src/assets/Exports/RoomModel.glb",
   function (gltf) {
     const loadedScene = gltf.scene;
 
@@ -3194,7 +3194,6 @@ loader.load(
       }
     });
 
-    console.log(loadedScene);
     scene.add(loadedScene);
   },
   undefined,
