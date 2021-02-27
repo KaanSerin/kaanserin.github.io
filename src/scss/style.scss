@@ -15,6 +15,10 @@ body{
         left: 50%;
         transform: translateX(-50%);
 
+        .name{
+            width: 55vw;
+        }
+
         .name, .description{
             text-align: center;
             font-size: 3rem;
@@ -24,6 +28,7 @@ body{
         .description{
             margin-top: 1rem;
             font-size: 1.5rem;
+            line-height: 2rem;
         }
     }
 
@@ -57,17 +62,6 @@ body{
     }
 }
 
-@keyframes typewriter{
-    from{width: 0;}
-    to{width: 24em;}
-  }
-  @keyframes blinkTextCursor{
-    from{border-right-color: rgba(255,255,255,.75);}
-    to{border-right-color: transparent;}
-  }
-
-
-
 // Bootstrap Small
 @media screen and (max-width: 767px){
     body{
@@ -81,6 +75,7 @@ body{
             .description{
                 text-align: start;
                 font-size: 1.25rem;
+                line-height: 1.375rem;
             }
         }
 
@@ -104,12 +99,14 @@ body{
         .text-area{
             top: 40px;
             .name{
+                width: 60vw;
                 text-align: start;
                 font-size: 1.75rem;
             }
             .description{
+                width: 55vw;
                 text-align: start;
-                font-size: 1rem;
+                font-size: 1.125rem;
             }
         }
 

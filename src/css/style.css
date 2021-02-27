@@ -11,6 +11,9 @@ body .text-area {
   left: 50%;
   transform: translateX(-50%);
 }
+body .text-area .name {
+  width: 55vw;
+}
 body .text-area .name, body .text-area .description {
   text-align: center;
   font-size: 3rem;
@@ -18,6 +21,7 @@ body .text-area .name, body .text-area .description {
 body .text-area .description {
   margin-top: 1rem;
   font-size: 1.5rem;
+  line-height: 2rem;
 }
 body .socials {
   position: absolute;
@@ -44,22 +48,6 @@ body .opacity-1 {
   opacity: 1 !important;
 }
 
-@keyframes typewriter {
-  from {
-    width: 0;
-  }
-  to {
-    width: 24em;
-  }
-}
-@keyframes blinkTextCursor {
-  from {
-    border-right-color: rgba(255, 255, 255, 0.75);
-  }
-  to {
-    border-right-color: transparent;
-  }
-}
 @media screen and (max-width: 767px) {
   body .text-area {
     top: 35px;
@@ -71,6 +59,7 @@ body .opacity-1 {
   body .text-area .description {
     text-align: start;
     font-size: 1.25rem;
+    line-height: 1.375rem;
   }
   body .socials {
     right: 30px;
@@ -85,12 +74,14 @@ body .opacity-1 {
     top: 40px;
   }
   body .text-area .name {
+    width: 60vw;
     text-align: start;
     font-size: 1.75rem;
   }
   body .text-area .description {
+    width: 55vw;
     text-align: start;
-    font-size: 1rem;
+    font-size: 1.125rem;
   }
   body .socials {
     right: 30px;
