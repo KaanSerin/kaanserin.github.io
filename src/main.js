@@ -55,6 +55,11 @@ const camera = new THREE.PerspectiveCamera(
 );
 
 const renderer = new THREE.WebGLRenderer({ antialias: true });
+
+// remember these initial values
+var tanFOV = Math.tan(((Math.PI / 180) * camera.fov) / 2);
+var windowHeight = window.innerHeight;
+
 renderer.setSize(window.innerWidth, window.innerHeight);
 renderer.shadowMap.enabled = true;
 document.body.appendChild(renderer.domElement);
@@ -154,6 +159,22 @@ const typeDesc = (chars, el) => {
   }
   el.textContent += descriptionText.charAt(descriptionTextCounter++);
 };
+
+// For window resize, credits go to => https://jsfiddle.net/psyrendust/8nbpehj3/
+const onWindowResize = (event) => {
+  camera.aspect = window.innerWidth / window.innerHeight;
+
+  // adjust the FOV
+  camera.fov =
+    (360 / Math.PI) * Math.atan(tanFOV * (window.innerHeight / windowHeight));
+
+  camera.updateProjectionMatrix();
+
+  renderer.setSize(window.innerWidth, window.innerHeight);
+  renderer.render(scene, camera);
+};
+
+window.addEventListener("resize", onWindowResize, false);
 
 // Mouse camera tilt
 let oldX = 0;
