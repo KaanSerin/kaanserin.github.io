@@ -2,9 +2,103 @@ body {
   margin: 0;
   padding: 0;
   background: #333;
-}
-body h1 {
   color: #f1f1f1;
+  font-family: "Share Tech Mono", monospace;
+}
+body .text-area {
+  position: absolute;
+  top: 50px;
+  left: 50%;
+  transform: translateX(-50%);
+}
+body .text-area .name, body .text-area .description {
+  text-align: center;
+  font-size: 3rem;
+}
+body .text-area .description {
+  margin-top: 1rem;
+  font-size: 1.5rem;
+}
+body .socials {
+  position: absolute;
+  right: 50px;
+  top: 90px;
+  opacity: 0;
+  transition: opacity 0.8s ease-in;
+}
+body .socials a {
+  color: #f1f1f1;
+}
+body .socials a:hover {
+  color: #d8d8d8;
+}
+body .socials a:focus {
+  border: none;
+  outline: none;
+}
+body .socials a i {
+  font-size: 5rem;
+  margin-bottom: 1.5rem;
+}
+body .opacity-1 {
+  opacity: 1 !important;
+}
+
+@keyframes typewriter {
+  from {
+    width: 0;
+  }
+  to {
+    width: 24em;
+  }
+}
+@keyframes blinkTextCursor {
+  from {
+    border-right-color: rgba(255, 255, 255, 0.75);
+  }
+  to {
+    border-right-color: transparent;
+  }
+}
+@media screen and (max-width: 767px) {
+  body .text-area {
+    top: 35px;
+  }
+  body .text-area .name {
+    text-align: start;
+    font-size: 2.25rem;
+  }
+  body .text-area .description {
+    text-align: start;
+    font-size: 1.25rem;
+  }
+  body .socials {
+    right: 30px;
+  }
+  body .socials a i {
+    margin-bottom: 3vw;
+    font-size: 10vw;
+  }
+}
+@media screen and (max-width: 576px) {
+  body .text-area {
+    top: 40px;
+  }
+  body .text-area .name {
+    text-align: start;
+    font-size: 1.75rem;
+  }
+  body .text-area .description {
+    text-align: start;
+    font-size: 1rem;
+  }
+  body .socials {
+    right: 30px;
+  }
+  body .socials a i {
+    margin-bottom: 3vw;
+    font-size: 10vw;
+  }
 }
 
 /*# sourceMappingURL=style.css.map */
